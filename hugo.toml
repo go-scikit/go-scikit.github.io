@@ -1,0 +1,160 @@
+baseURL = 'https://go-scikit.github.io/'
+locale  = 'en-us'
+title   = 'go-scikit'
+# No theme -- the layout is the go-* family template: one self-contained
+# layouts/index.html over the shared design.
+
+disableKinds = ['taxonomy', 'term', 'rss', 'sitemap', '404']
+
+[markup.goldmark.renderer]
+  unsafe = true
+
+# The design -- layouts/partials/styles.html, theme-toggle.html,
+# fork-ribbon.html and icons/{github,book}.html -- comes from the shared Hugo
+# module github.com/go-fleettools/landingkit, not from copies here: the copies
+# drifted. Its version is pinned in go.mod (Renovate bumps it), and kit.go
+# keeps `go mod tidy` from deleting that requirement. A file of the same name
+# under layouts/partials/ would silently override the module's.
+[module]
+  [[module.imports]]
+    path = "github.com/go-fleettools/landingkit"
+
+[params]
+  description = "go-scikit: the scientific stack for Go, in pure Go (CGO=0). N-dimensional arrays and NumPy's random numbers, FFTs, optimisation, integration and special functions, probability and statistics, labelled tables, figures and compiled, reactive notebooks, each measured against its Python reference."
+
+# One entry per member organisation. The cards in #orgs, the strip under the
+# hero, the stack diagram in #stack and the ci check that the page names
+# every organisation all come from this list. `layer` places it in the stack:
+# 0 the arrays, 1 the libraries that compute on them, 2 the notebook.
+# Every statement is from the organisation's own profile, README or landing.
+[[params.orgs]]
+  name   = "go-ndarray"
+  layer  = 0
+  short  = "arrays, numpy.linalg, numpy.random"
+  lib    = "ndarray"
+  blurb  = "N-dimensional arrays in 13 dtypes with NumPy 2 promotion, broadcasting, strided views and reductions, multicore and SIMD. Package <code>linalg</code> is <code>numpy.linalg</code>, <code>fft</code> is <code>numpy.fft</code>, and <code>random</code> is <code>numpy.random</code> with NumPy's numbers for the same seed."
+  playground = "https://go-ndarray.github.io/playground/"
+[[params.orgs]]
+  name   = "go-fft"
+  layer  = 0
+  short  = "numpy.fft, scipy.fft"
+  lib    = "fft"
+  blurb  = "The <code>numpy.fft</code> / <code>scipy.fft</code> equivalent: complex and real transforms of any length, N-D, the DCT and DST, single precision, windows, with no dependency on FFTW. AVX2 and AVX-512 kernels on amd64, NEON on arm64, bit-identical to the Go code."
+  playground = "https://go-fft.github.io/playground/"
+[[params.orgs]]
+  name   = "go-numerics"
+  layer  = 1
+  short  = "optimize, integrate, special"
+  lib    = "optimize"
+  blurb  = "Numerical methods ported statement by statement from their reference algorithms: minimisation, roots, least squares and linear programming (<code>optimize</code>); QUADPACK quadrature and ODE solvers (<code>integrate</code>); gamma, beta, error, Bessel and zeta functions measured against mpmath (<code>special</code>)."
+[[params.orgs]]
+  name   = "go-statistics"
+  layer  = 1
+  short  = "distributions, statistics, tests"
+  lib    = "stats"
+  blurb  = "32 univariate and 3 multivariate distributions with every method of SciPy's frozen distributions, descriptive statistics with NumPy's 13 quantile methods, and the statistical tests, from t-tests to Shapiro–Wilk and Anderson–Darling."
+[[params.orgs]]
+  name   = "go-dataframe"
+  layer  = 1
+  short  = "labelled tables"
+  lib    = "dataframe"
+  blurb  = "<code>Series</code>, <code>DataFrame</code> and <code>Index</code> whose numeric columns are go-ndarray arrays: CSV, Arrow and Parquet, group-by, joins, reshaping and time series, giving pandas' answers."
+[[params.orgs]]
+  name   = "go-plot"
+  layer  = 1
+  short  = "figures, SVG and PNG"
+  lib    = "plot"
+  blurb  = "matplotlib's object model and defaults, figures to SVG and PNG, real TeX in the labels; ticks, colormaps and layout tested equal to matplotlib where they can be equal."
+[[params.orgs]]
+  name   = "go-notebook"
+  layer  = 2
+  short  = "compiled, reactive notebooks"
+  lib    = "notebook"
+  blurb  = "A notebook is a Markdown file whose <code>go</code> blocks are cells. The kernel compiles it into a real Go program, orders the cells by what they use, and runs only what changed, keeping values across runs."
+
+# The cards of #measured and their count come from this list. Each statement
+# is from the document its link names.
+[[params.claims]]
+  name = "Accuracy against mpmath"
+  what = "go-statistics measures every distribution function in ULPs against mpmath, with SciPy on the same points: at or below SciPy's error in 1473 of 1479 regions, the six exceptions under 4.5 ulp."
+  href = "https://github.com/go-statistics/stats/blob/main/docs/accuracy.md"
+  link = "go-statistics accuracy"
+[[params.claims]]
+  name = "Special functions in ULPs"
+  what = "go-numerics' special functions, about 250 000 points in 419 regions over 62 functions: at or below SciPy's error in 418 regions."
+  href = "https://github.com/go-numerics/special/blob/main/docs/accuracy.md"
+  link = "go-numerics accuracy"
+[[params.claims]]
+  name = "NumPy's numbers, same seed"
+  what = "go-ndarray's <code>random</code> is <code>numpy.random</code>: PCG64, MT19937, Philox, SFC64 and 40 samplers, bit-exact against NumPy 2.5.3 on x86-64, the few ULP-level exceptions listed."
+  href = "https://github.com/go-ndarray/ndarray/blob/main/docs/random.md"
+  link = "go-ndarray random"
+[[params.claims]]
+  name = "SciPy's draws, to the bit"
+  what = "On that generator, go-statistics' draws of 17 distributions, Dirichlet and multinomial are bit-identical to SciPy's; the others are listed with how much they differ."
+  href = "https://github.com/go-statistics/stats/blob/main/docs/rvs-table.md"
+  link = "go-statistics draws"
+[[params.claims]]
+  name = "The reference's path"
+  what = "116 of 124 fixture integrals take SciPy's exact QUADPACK subdivision path, and 110 of 120 <code>solve_ivp</code> runs its exact steps."
+  href = "https://github.com/go-numerics/integrate"
+  link = "go-numerics integrate"
+[[params.claims]]
+  name = "Faster than FFTW, and slower where it is"
+  what = "At v0.27.0 go-fft is faster than FFTW on all 24 rows on Neoverse-N1 and at or above numpy.fft and scipy.fft on all 24 rows on every host measured; the tables include the rows FFTW wins."
+  href = "https://github.com/go-fft/fft/blob/main/BENCHMARKS.md"
+  link = "go-fft benchmarks"
+[[params.claims]]
+  name = "Against NumPy and OpenBLAS"
+  what = "go-ndarray is faster on whole-array reductions and the <code>*Into</code> forms of elementwise operations, and slower on <code>MatMul</code> against 16-thread OpenBLAS from 512²."
+  href = "https://github.com/go-ndarray/ndarray/blob/main/docs/perf.md"
+  link = "go-ndarray performance"
+[[params.claims]]
+  name = "pandas' answers, polars' speed"
+  what = "go-dataframe replays 173 cases recorded from pandas 3.0; polars is faster on most of the operations measured, and the numbers say by how much."
+  href = "https://github.com/go-dataframe/dataframe/blob/main/docs/perf.md"
+  link = "go-dataframe performance"
+[[params.claims]]
+  name = "matplotlib's ticks"
+  what = "go-plot's tick locations, labels and offset text on 408 axes of real figures: every location bit for bit, every label character for character."
+  href = "https://github.com/go-plot/plot/blob/main/docs/design.md"
+  link = "go-plot design"
+
+# Every field below is rendered by layouts/index.html (#repos). A field
+# nothing renders does not stay true.
+[[params.repos]]
+  name  = "go-scikit.github.io"
+  kind  = "site"
+  href  = "https://github.com/go-scikit/go-scikit.github.io"
+  blurb = "This page (Hugo, on the go-fleettools landing kit). The notebook in the hero is run again by CI, which fails if its output changes."
+[[params.repos]]
+  name  = "brand"
+  kind  = "assets"
+  href  = "https://github.com/go-scikit/brand"
+  blurb = "Logos and icons in SVG / PNG / JPG / ICO / ICNS; the mark is the stack, written by a Go program from the list of member organisations."
+[[params.repos]]
+  name  = ".github"
+  kind  = "profile"
+  href  = "https://github.com/go-scikit/.github"
+  blurb = "The organisation profile and the shared Renovate preset."
+
+[params.brand]
+# Generated by go-fleettools/landingkit from static/img/logo.svg: the colours are
+# READ from the logo's gradient, never chosen. Do not add other keys:
+# neutrals (backgrounds, surfaces, greys) belong to the shared sheet.
+# Contrast: base on white 10.55:1, bright on the dark background 7.58:1.
+  base = "#2f3e63"
+  deep = "#1d263c"
+  bright = "#8fa3c8"
+  shadow = "rgba(47,62,99,.7)"
+  glow = "rgba(47,62,99,.6)"
+  wash = "rgba(47,62,99,.10)"
+  washDeep = "rgba(29,38,60,.06)"
+  chipBg = "#f2f4f8"
+  chipBorder = "#dde3ee"
+  chipFg = "#1d263c"
+  chipBgDark = "rgba(143,163,200,.14)"
+  chipBorderDark = "rgba(143,163,200,.32)"
+  chipFgDark = "#c1cce1"
+  statsEnd = "#e4e9f2"
+  bandText = "#edf0f6"

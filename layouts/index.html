@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ .Site.Title }} — the scientific stack for Go</title>
+<meta name="description" content="{{ .Site.Params.description }}">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+{{ partial "styles.html" . }}
+</head>
+<body class="lm">
+  <header class="nav"><div class="wrap">
+    <a class="brand" href="/"><img class="glyph" src="/img/logo.svg" width="32" height="32" alt="go-scikit logo"> {{ .Site.Title }}</a>
+    <nav><a href="#stack">Stack</a><a href="#orgs">Organisations</a><a href="#measured">Measured</a><a href="#start">Get started</a><a href="#repos">Repositories</a></nav>
+    {{ partial "theme-toggle.html" . }}
+  </div></header>
+  {{ partial "fork-ribbon.html" "https://github.com/go-scikit" }}
+
+  {{/* example/first.md and example/output.txt, read at build time: the
+       notebook in the terminal is the file CI runs, and the output under it
+       is what that run printed (timings removed). The ci workflow runs the
+       notebook again and fails if the output differs. */}}
+  {{- $nb := readFile "example/first.md" -}}
+  {{- $out := readFile "example/output.txt" -}}
+  {{- $orgs := .Site.Params.orgs -}}
+  {{/* min-width:0 on both grid items: a grid item is as wide as its
+       min-content by default, and the terminal's unwrapped <pre> made the
+       hero, and so the whole page, wider than a phone. */}}
+  <div class="hero"><div class="wrap">
+    <div style="min-width:0">
+      <h1 class="head">Science in Go,<br>{{/* The sheet's .accent paints with --grad, base to deep: on a dark page
+         this logo's dark slate stops would vanish. --accent and --accent-deep
+         are the same two in light and the bright stop in dark. */}}<span class="accent" style="background:linear-gradient(135deg,var(--accent),var(--accent-deep));-webkit-background-clip:text;background-clip:text">all the way down.</span></h1>
+      <p class="sub">go-scikit is the umbrella over <b>{{ len $orgs }} organisations</b> that together cover what a Python notebook reaches for in NumPy, SciPy, pandas and matplotlib: <b>arrays</b>, <b>FFTs</b>, <b>numerical methods</b>, <b>statistics</b>, <b>labelled tables</b>, <b>figures</b> and <b>notebooks</b>. Pure Go, CGO=0, and each library measured against its Python reference, with the documents that say where it is slower or less accurate.</p>
+      <div class="cta">
+        <a class="btn btn-primary" href="#start">Write a first notebook →</a>
+        <a class="btn btn-ghost" href="#orgs">{{ partial "icons/book.html" . }}The organisations</a>
+      </div>
+      <div class="trust"><span><b>{{ len $orgs }}</b> organisations</span><span><b>CGO=0</b> everywhere</span><span><b>BSD-3-Clause</b></span></div>
+    </div>
+    <div class="term" style="min-width:0">
+      <div class="bar"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i><span class="t">first.md</span></div>
+<pre style="white-space:pre;overflow-x:auto;tab-size:4">{{ $nb }}
+<span class="c-cmd">$ notebook run first.md</span>
+<span class="c-out">{{ $out }}</span></pre>
+    </div>
+  </div></div>
+
+  <div class="strip"><div class="wrap">
+    <span class="lead-line">{{ len $orgs }} organisations — <b>one stack</b>, each with its own site and documentation</span>
+    <div class="mods">{{ range $orgs }}<a href="https://{{ .name }}.github.io/">{{ .name }}</a>{{ end }}</div>
+  </div></div>
+
+  {{/* The diagram is drawn from params.orgs: layer 2 on top, layer 0 at the
+       bottom, one box per organisation, as the mark draws it. */}}
+  <section id="stack" style="padding-top:54px"><div class="wrap">
+    <span class="eyebrow">How the pieces fit</span>
+    <h2>Arrays at the bottom, <i>notebooks on top</i>.</h2>
+    <p class="lead">go-ndarray's arrays are what the libraries above take and return, and its generator is where their random numbers come from; its <code>fft</code> package runs on go-fft. go-statistics takes its special functions and optimisers from go-numerics, go-dataframe's numeric columns are go-ndarray arrays and its <code>dfplot</code> draws with go-plot, and a go-notebook cell can use all of them.</p>
+    <div style="margin-top:30px;display:flex;flex-direction:column;gap:10px">
+      {{ range $layer := slice 2 1 0 }}
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px">
+        {{ range where $orgs "layer" $layer }}
+        <a class="ph" href="https://{{ .name }}.github.io/" style="display:flex;align-items:center;gap:12px">
+          <img src="https://raw.githubusercontent.com/{{ .name }}/brand/main/svg/color/{{ .name }}.svg" width="36" height="36" alt="{{ .name }} logo" style="border-radius:9px;flex:none">
+          <span><b style="font-size:14.5px">{{ .name }}</b><br><span style="color:var(--slate);font-size:13px">{{ .short }}</span></span>
+        </a>
+        {{ end }}
+      </div>
+      {{ end }}
+    </div>
+  </div></section>
+
+  <section id="orgs" style="padding-top:20px"><div class="wrap">
+    <span class="eyebrow">The organisations</span>
+    <h2>{{ len $orgs }} organisations, <i>one site each</i>.</h2>
+    <p class="lead">Each organisation has its own landing, documentation and release cycle. The libraries are in the organisations; this page only points at them.</p>
+    <div class="grid">
+      {{ range $orgs }}
+      <div class="card">
+        <img src="https://raw.githubusercontent.com/{{ .name }}/brand/main/svg/color/{{ .name }}.svg" width="42" height="42" alt="{{ .name }} logo" style="border-radius:12px;margin-bottom:14px;display:block">
+        <h3>{{ .name }}</h3>
+        <p>{{ .blurb | safeHTML }}</p>
+        <p style="margin-top:12px;font-weight:700;color:var(--accent)"><a href="https://{{ .name }}.github.io/">Site →</a> &nbsp; <a href="https://{{ .name }}.github.io/docs/">Docs →</a> &nbsp; <a href="https://github.com/{{ .name }}/{{ .lib }}">Source →</a>{{ with .playground }} &nbsp; <a href="{{ . }}">Playground →</a>{{ end }}</p>
+      </div>
+      {{ end }}
+    </div>
+  </div></section>
+
+  <section id="measured" style="padding-top:10px"><div class="wrap">
+    <span class="eyebrow">What is measured</span>
+    <h2>{{ len .Site.Params.claims }} claims, each <i>with its evidence</i>.</h2>
+    <p class="lead">Every figure below is from the library's own documentation, which says how it was measured and against which version of the reference. The references are mpmath, NumPy, SciPy, pandas, matplotlib and FFTW; where a library loses to them, the same documents say so.</p>
+    <div class="grid">
+      {{ range .Site.Params.claims }}
+      <div class="card"><h3>{{ .name }}</h3><p>{{ .what | safeHTML }}</p><p style="margin-top:12px;font-weight:700;color:var(--accent)"><a href="{{ .href }}">{{ .link }} →</a></p></div>
+      {{ end }}
+    </div>
+  </div></section>
+
+  <section id="start" style="padding-top:10px"><div class="wrap">
+    <span class="eyebrow">Get started</span>
+    <h2>A first notebook, <i>in four commands</i>.</h2>
+    <p class="lead">A notebook is a Markdown file; its <code>go</code> blocks are the cells. Put the notebook from the top of this page in <code>first.md</code>, in a module that requires the libraries it imports, and run it. It prints the quartiles of a thousand normal draws from seed 42: the draws SciPy's <code>norm.rvs(10, 2, size=1000, random_state=np.random.default_rng(42))</code> makes.</p>
+    <div class="term" style="margin-top:22px">
+      <div class="bar"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i><span class="t">shell</span></div>
+<pre style="white-space:pre;overflow-x:auto"><span class="c-cmd">$ go install github.com/go-notebook/notebook/cmd/notebook@latest</span>
+<span class="c-cmd">$ go mod init example.com/first</span>
+<span class="c-cmd">$ go get github.com/go-statistics/stats github.com/go-ndarray/ndarray</span>
+<span class="c-cmd">$ notebook run first.md</span>
+<span class="c-out">{{ $out }}</span>
+<span class="c-com"># notebook html first.md    writes first.html
+# notebook serve first.md   the same, live in the browser, editable</span></pre>
+    </div>
+    <p class="lead">Run it again and every cell is <i>kept</i>: a cell whose code and inputs did not change is not run again, across runs. The <a href="https://go-notebook.github.io/docs/"><u>go-notebook documentation</u></a> gives the cell rules; to try the arrays and the transforms without installing anything, the <a href="https://go-ndarray.github.io/playground/"><u>go-ndarray</u></a> and <a href="https://go-fft.github.io/playground/"><u>go-fft</u></a> playgrounds run them compiled to WebAssembly in the browser.</p>
+  </div></section>
+
+  <section id="repos" style="padding-top:10px"><div class="wrap">
+    <span class="eyebrow">Repositories</span>
+    <h2>What is here.</h2>
+    <div class="road">
+      {{ range .Site.Params.repos }}
+      <div class="ph">
+        <div class="top"><h4><a href="{{ .href }}">{{ .name }}</a></h4><span class="tag active">{{ .kind }}</span></div>
+        <p>{{ .blurb | safeHTML }}</p>
+      </div>
+      {{ end }}
+    </div>
+  </div></section>
+
+  <section id="eco" style="padding-top:6px"><div class="wrap">
+    <div class="band">
+      <h2>One stack, {{ len $orgs }} organisations.</h2>
+      <p>Each library is a <code>go get</code> away and none needs cgo. Start from the organisation that matches the question: the arrays, a transform, a solver, a distribution, a table or a figure, then reach the others from a notebook.</p>
+      <a class="btn btn-ghost" href="https://github.com/go-scikit">{{ partial "icons/github.html" . }}go-scikit on GitHub →</a>
+    </div>
+  </div></section>
+
+  <footer><div class="wrap"><span>go-scikit · <a href="https://github.com/go-scikit">go-scikit on GitHub</a> · BSD-3-Clause</span><span>arrays in · science out</span></div></footer>
+</body>
+</html>
