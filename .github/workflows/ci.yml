@@ -1,0 +1,76 @@
+name: ci
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: the site builds
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      # Hugo resolves the landingkit module (hugo.toml [module]) with the go
+      # command, at the version go.mod pins.
+      - uses: actions/setup-go@v7
+        with:
+          go-version-file: go.mod
+          cache: false
+      - uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: "0.167.0"
+          extended: true
+      - run: hugo --minify
+      # A portal that builds and leaves an organisation out is a portal nobody
+      # notices is incomplete. The list is written here, not read from
+      # hugo.toml: a check that takes its list from the file it checks passes
+      # whatever the file says.
+      - name: every member organisation and repository is on it
+        run: |
+          rc=0
+          for org in go-ndarray go-fft go-numerics go-statistics go-dataframe go-plot go-notebook; do
+            for url in "https://$org.github.io/" "https://$org.github.io/docs/"; do
+              grep -qF "$url" public/index.html \
+                || { echo "::error::$url is not on the page"; rc=1; }
+            done
+          done
+          for repo in go-scikit.github.io brand .github; do
+            grep -qF "go-scikit/$repo" public/index.html \
+              || { echo "::error::go-scikit/$repo is not on the page"; rc=1; }
+          done
+          [ $rc -eq 0 ] && echo "the page names every member organisation, its site and docs, and every repository here"
+          exit $rc
+
+  # The hero shows example/first.md and, under it, example/output.txt: what
+  # running it printed. This runs the notebook again, with the notebook
+  # command and the library versions example/go.mod pins, and fails if the
+  # output differs. Timings ("ran in 41µs") and the "kept" marker of a cached
+  # cell are removed first: they are the only parts that change from run to
+  # run.
+  notebook:
+    name: the notebook prints what the page says
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-go@v7
+        with:
+          go-version-file: example/go.mod
+          cache-dependency-path: example/go.sum
+      - name: Run the notebook
+        working-directory: example
+        env:
+          GOWORK: "off"
+        run: |
+          set -o pipefail
+          go tool notebook run first.md > out.raw
+          sed -E 's/, (ran in [^)]*|kept)\)/)/' out.raw > output.txt
+      - name: The committed output is the one printed
+        run: |
+          if ! git diff --exit-code -- example/output.txt; then
+            echo "::error::example/output.txt differs from what first.md prints: run it again (see README) and commit the output"
+            exit 1
+          fi
