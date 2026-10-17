@@ -47,12 +47,14 @@ disableKinds = ['taxonomy', 'term', 'rss', 'sitemap', '404']
   short  = "optimize, integrate, special"
   lib    = "optimize"
   blurb  = "Numerical methods ported statement by statement from their reference algorithms: minimisation, roots, least squares and linear programming (<code>optimize</code>); QUADPACK quadrature and ODE solvers (<code>integrate</code>); gamma, beta, error, Bessel and zeta functions measured against mpmath (<code>special</code>)."
+  playground = "https://go-numerics.github.io/playground/"
 [[params.orgs]]
   name   = "go-statistics"
   layer  = 1
   short  = "distributions, statistics, tests"
   lib    = "stats"
   blurb  = "32 univariate and 3 multivariate distributions with every method of SciPy's frozen distributions, descriptive statistics with NumPy's 13 quantile methods, and the statistical tests, from t-tests to Shapiro–Wilk and Anderson–Darling."
+  playground = "https://go-statistics.github.io/playground/"
 [[params.orgs]]
   name   = "go-dataframe"
   layer  = 1
