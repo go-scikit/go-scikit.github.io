@@ -122,6 +122,79 @@ disableKinds = ['taxonomy', 'term', 'rss', 'sitemap', '404']
   href = "https://github.com/go-plot/plot/blob/main/docs/design.md"
   link = "go-plot design"
 
+# The roadmap section (#roadmap). Every statement is from
+# https://github.com/go-scikit/roadmap (PLAN.md and STATUS.md); the new
+# organisations have no sites yet, so they link to their GitHub pages.
+[[params.waves]]
+  name  = "Wave 1: the everyday MATLAB core"
+  what  = "Correctly rounded <code>big.Float</code> functions and a Go oracle harness; sparse matrices and iterative solvers; interpolation and splines; filter design and spectral estimation."
+  homes = "go-bignum, go-sparse, go-approx, go-dsp"
+[[params.waves]]
+  name  = "Wave 2: models and geometry"
+  what  = "Constrained and global optimisation; linear models and GLM; exact predicates, Delaunay, Voronoi; automatic differentiation; units; scientific file formats; dense linear algebra additions."
+  homes = "go-numerics/optimize, go-statistics/models, go-geometry, go-autodiff, go-units, go-sciio, go-ndarray/linalg"
+[[params.waves]]
+  name  = "Wave 3: systems, PDEs, 3D, interactivity"
+  what  = "3D plots and <code>Manipulate</code>; control systems; meshing and finite elements; sparse direct solvers, wavelets, Chebyshev and AAA; machine learning and time series; graph algorithms and layouts."
+  homes = "go-plot, go-notebook, go-control, go-geometry, go-fem, go-sparse, go-dsp, go-approx, go-mlkit, go-statistics/timeseries, go-graphalgo, go-graphdrawing"
+[[params.waves]]
+  name  = "Wave 4: Mathematica's core"
+  what  = "Ball arithmetic, N-digit special functions and number theory; computer algebra."
+  homes = "go-bignum, go-symbolic"
+
+[[params.neworgs]]
+  name = "go-bignum"
+  state = "in progress"
+  what = "arbitrary precision, number theory, the Go oracle harness"
+[[params.neworgs]]
+  name = "go-sparse"
+  state = "in progress"
+  what = "sparse matrices, orderings, iterative and direct solvers, sparse eigensolvers"
+[[params.neworgs]]
+  name = "go-approx"
+  state = "in progress"
+  what = "interpolation, splines, polynomials, Chebyshev and AAA approximation, scattered data"
+[[params.neworgs]]
+  name = "go-dsp"
+  state = "in progress"
+  what = "filter design and filtering, spectral estimation, resampling, wavelets, audio I/O"
+[[params.neworgs]]
+  name = "go-symbolic"
+  state = "planned"
+  what = "computer algebra"
+[[params.neworgs]]
+  name = "go-mlkit"
+  state = "planned"
+  what = "machine learning, clustering, classification, model selection"
+[[params.neworgs]]
+  name = "go-autodiff"
+  state = "planned"
+  what = "automatic differentiation"
+[[params.neworgs]]
+  name = "go-geometry"
+  state = "planned"
+  what = "robust predicates, convex hull, Delaunay, Voronoi, k-d trees, mesh generation"
+[[params.neworgs]]
+  name = "go-fem"
+  state = "planned"
+  what = "finite elements and PDE solvers"
+[[params.neworgs]]
+  name = "go-graphalgo"
+  state = "planned"
+  what = "graph algorithms"
+[[params.neworgs]]
+  name = "go-control"
+  state = "planned"
+  what = "control systems and DAE solvers"
+[[params.neworgs]]
+  name = "go-units"
+  state = "planned"
+  what = "units and physical constants"
+[[params.neworgs]]
+  name = "go-sciio"
+  state = "planned"
+  what = "scientific file formats (HDF5, MAT, NetCDF, FITS, npy, Matrix Market, WAV/FLAC)"
+
 # Every field below is rendered by layouts/index.html (#repos). A field
 # nothing renders does not stay true.
 [[params.repos]]
@@ -134,6 +207,11 @@ disableKinds = ['taxonomy', 'term', 'rss', 'sitemap', '404']
   kind  = "assets"
   href  = "https://github.com/go-scikit/brand"
   blurb = "Logos and icons in SVG / PNG / JPG / ICO / ICNS; the mark is the stack, written by a Go program from the list of member organisations."
+[[params.repos]]
+  name  = "roadmap"
+  kind  = "plan"
+  href  = "https://github.com/go-scikit/roadmap"
+  blurb = "The parity plan with MATLAB and Mathematica: the home of each domain, the four waves, the status of each item and the bibliography."
 [[params.repos]]
   name  = ".github"
   kind  = "profile"
