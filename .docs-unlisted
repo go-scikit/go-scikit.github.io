@@ -1,0 +1,7 @@
+# Repositories this organisation has and deliberately does not advertise.
+#
+# The name, a space, and WHY. The reason is required, and go-fleettools/docscan
+# keeps printing the line: this file moves a repository from invisible to
+# accounted for, it does not hide it.
+
+ruby  a placeholder: LICENSE and the two-line README `ghnew` writes (66 bytes), no Go code and no go.mod. The Ruby bindings it is named for are not written yet — a card would send a reader to an empty page. Fill it and give it a card; until then it is accounted for here.
