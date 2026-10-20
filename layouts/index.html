@@ -101,16 +101,16 @@
   <section id="roadmap" style="padding-top:10px"><div class="wrap">
     <span class="eyebrow">Roadmap</span>
     <h2>Parity with MATLAB and Mathematica, <i>in four waves</i>.</h2>
-    <p class="lead">The goal is feature parity with MATLAB (base and toolboxes) and Mathematica, in pure Go (CGO=0), each piece validated against the reference tools of its domain. The plan, the home of each domain and the order of the work are in the <a href="https://github.com/go-scikit/roadmap"><u>roadmap repository</u></a>: <a href="https://github.com/go-scikit/roadmap/blob/main/PLAN.md"><u>PLAN.md</u></a>, <a href="https://github.com/go-scikit/roadmap/blob/main/STATUS.md"><u>STATUS.md</u></a> and the <a href="https://github.com/go-scikit/roadmap/tree/main/bib"><u>bibliography</u></a>. One package of the new organisations has been released so far: <a href="https://github.com/go-approx/interp"><u>go-approx/interp</u></a> v0.1.0 (speed comparison in its <a href="https://github.com/go-approx/interp/blob/main/docs/perf.md"><u>docs/perf.md</u></a>). The vector-update kernels <code>Axpy</code>, <code>Xpby</code>, <code>AxpyDot</code> and <code>Scale</code> shipped in go-simd/floats v0.4.0. Performance pull requests are in review for <a href="https://github.com/go-approx/poly/pull/2"><u>poly</u></a>, <a href="https://github.com/go-dsp/signal/pull/2"><u>signal</u></a> and <a href="https://github.com/go-sparse/sparse/pull/2"><u>sparse</u></a>.</p>
+    <p class="lead">The goal is feature parity with MATLAB (base and toolboxes) and Mathematica, in pure Go (CGO=0), each piece validated against the reference tools of its domain. The plan, the home of each domain and the order of the work are in the <a href="https://github.com/go-scikit/roadmap"><u>roadmap repository</u></a>: <a href="https://github.com/go-scikit/roadmap/blob/main/PLAN.md"><u>PLAN.md</u></a>, <a href="https://github.com/go-scikit/roadmap/blob/main/STATUS.md"><u>STATUS.md</u></a> and the <a href="https://github.com/go-scikit/roadmap/tree/main/bib"><u>bibliography</u></a>. Four packages of the new organisations have been released at v0.1.0: <a href="https://github.com/go-approx/interp"><u>go-approx/interp</u></a> (speed comparison in its <a href="https://github.com/go-approx/interp/blob/main/docs/perf.md"><u>docs/perf.md</u></a>), <a href="https://github.com/go-approx/poly"><u>go-approx/poly</u></a>, <a href="https://github.com/go-dsp/signal"><u>go-dsp/signal</u></a> and <a href="https://github.com/go-sparse/sparse"><u>go-sparse/sparse</u></a>; <a href="https://github.com/go-bignum/bigfloat"><u>go-bignum/bigfloat</u></a> is in development and not yet tagged. The vector-update kernels <code>Axpy</code>, <code>Xpby</code>, <code>AxpyDot</code> and <code>Scale</code> shipped in go-simd/floats v0.4.0.</p>
     <div class="grid">
       {{ range .Site.Params.waves }}
       <div class="card"><h3>{{ .name }}</h3><p>{{ .what | safeHTML }}</p><p style="margin-top:12px;color:var(--slate);font-size:13.5px">Homes: {{ .homes }}</p></div>
       {{ end }}
     </div>
-    <p class="lead" style="margin-top:30px">The {{ len .Site.Params.neworgs }} new organisations have no sites yet; they are on GitHub.</p>
+    <p class="lead" style="margin-top:30px">The {{ len .Site.Params.neworgs }} new organisations. The first four have a landing page and documentation; the others are on GitHub only.</p>
     <ul>
       {{ range .Site.Params.neworgs }}
-      <li><a href="https://github.com/{{ .name }}"><b>{{ .name }}</b></a> ({{ .state }}): {{ .what }}</li>
+      <li><a href="https://github.com/{{ .name }}"><b>{{ .name }}</b></a> ({{ .state }}): {{ .what }}{{ with .site }} &middot; <a href="{{ . }}"><u>landing</u></a>{{ end }}{{ with .docs }} &middot; <a href="{{ . }}"><u>docs</u></a>{{ end }}</li>
       {{ end }}
     </ul>
   </div></section>
