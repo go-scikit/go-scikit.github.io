@@ -152,7 +152,7 @@ disableKinds = ['taxonomy', 'term', 'rss', 'sitemap', '404']
   what = "sparse matrices, orderings, iterative and direct solvers, sparse eigensolvers"
 [[params.neworgs]]
   name = "go-approx"
-  state = "in progress"
+  state = "interp v0.1.0 released; poly performance work in review (poly#2)"
   what = "interpolation, splines, polynomials, Chebyshev and AAA approximation, scattered data"
 [[params.neworgs]]
   name = "go-dsp"
