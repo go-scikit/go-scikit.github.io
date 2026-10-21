@@ -1,0 +1,11 @@
+{{- /* An organisation's logo for the cards and the stack diagram: its own
+     brand when published (`brand = true` in hugo.toml), otherwise the
+     go-scikit mark, faded, so that every card has the same shape and none
+     shows a broken image. Context: dict "org" (a params.orgs entry), "size"
+     and "radius" in pixels. */ -}}
+{{- $o := .org -}}
+{{- if $o.brand -}}
+<img src="https://raw.githubusercontent.com/{{ $o.name }}/brand/main/svg/color/{{ $o.name }}.svg" width="{{ .size }}" height="{{ .size }}" alt="{{ $o.name }} logo" style="border-radius:{{ .radius }}px;flex:none;display:block">
+{{- else -}}
+<img src="/img/logo.svg" width="{{ .size }}" height="{{ .size }}" alt="{{ $o.name }} (no logo yet)" style="border-radius:{{ .radius }}px;flex:none;display:block;opacity:.35;filter:grayscale(1)">
+{{- end -}}

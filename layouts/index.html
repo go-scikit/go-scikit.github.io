@@ -31,7 +31,7 @@
       <h1 class="head">Science in Go,<br>{{/* The sheet's .accent paints with --grad, base to deep: on a dark page
          this logo's dark slate stops would vanish. --accent and --accent-deep
          are the same two in light and the bright stop in dark. */}}<span class="accent" style="background:linear-gradient(135deg,var(--accent),var(--accent-deep));-webkit-background-clip:text;background-clip:text">all the way down.</span></h1>
-      <p class="sub">go-scikit is the umbrella over <b>{{ len $orgs }} organisations</b> that together cover what a Python notebook reaches for in NumPy, SciPy, pandas and matplotlib: <b>arrays</b>, <b>FFTs</b>, <b>numerical methods</b>, <b>statistics</b>, <b>labelled tables</b>, <b>figures</b> and <b>notebooks</b>. Pure Go, CGO=0, and each library measured against its Python reference, with the documents that say where it is slower or less accurate.</p>
+      <p class="sub">go-scikit is the umbrella over <b>{{ len $orgs }} organisations</b> that together cover what a Python notebook reaches for in NumPy, SciPy, pandas and matplotlib: <b>arrays</b>, <b>FFTs</b>, <b>numerical methods</b>, <b>statistics</b>, <b>labelled tables</b>, <b>figures</b> and <b>notebooks</b>, and, on the way to parity with MATLAB and Mathematica, <b>sparse matrices</b>, <b>interpolation</b>, <b>signal processing</b> and <b>arbitrary precision</b>. Pure Go, CGO=0, and each library measured against its reference, with the documents that say where it is slower or less accurate.</p>
       <div class="cta">
         <a class="btn btn-primary" href="#start">Write a first notebook →</a>
         <a class="btn btn-ghost" href="#orgs">{{ partial "icons/book.html" . }}The organisations</a>
@@ -48,7 +48,7 @@
 
   <div class="strip"><div class="wrap">
     <span class="lead-line">{{ len $orgs }} organisations — <b>one stack</b>, each with its own site and documentation</span>
-    <div class="mods">{{ range $orgs }}<a href="https://{{ .name }}.github.io/">{{ .name }}</a>{{ end }}</div>
+    <div class="mods">{{ range $orgs }}<a href="{{ if .live }}https://{{ .name }}.github.io/{{ else }}https://github.com/{{ .name }}{{ end }}">{{ .name }}</a>{{ end }}</div>
   </div></div>
 
   {{/* The diagram is drawn from params.orgs: layer 2 on top, layer 0 at the
@@ -61,8 +61,8 @@
       {{ range $layer := slice 2 1 0 }}
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px">
         {{ range where $orgs "layer" $layer }}
-        <a class="ph" href="https://{{ .name }}.github.io/" style="display:flex;align-items:center;gap:12px">
-          <img src="https://raw.githubusercontent.com/{{ .name }}/brand/main/svg/color/{{ .name }}.svg" width="36" height="36" alt="{{ .name }} logo" style="border-radius:9px;flex:none">
+        <a class="ph" href="{{ if .live }}https://{{ .name }}.github.io/{{ else }}https://github.com/{{ .name }}{{ end }}" style="display:flex;align-items:center;gap:12px">
+          {{ partial "org-logo.html" (dict "org" . "size" 36 "radius" 9) }}
           <span><b style="font-size:14.5px">{{ .name }}</b><br><span style="color:var(--slate);font-size:13px">{{ .short }}</span></span>
         </a>
         {{ end }}
@@ -73,15 +73,16 @@
 
   <section id="orgs" style="padding-top:20px"><div class="wrap">
     <span class="eyebrow">The organisations</span>
-    <h2>{{ len $orgs }} organisations, <i>one site each</i>.</h2>
-    <p class="lead">Each organisation has its own landing, documentation and release cycle. The libraries are in the organisations; this page only points at them.</p>
+    <h2>{{ len $orgs }} organisations, <i>one stack</i>.</h2>
+    <p class="lead">Each organisation has its own landing, documentation and release cycle; each card gives its release status. The libraries are in the organisations; this page only points at them. Planned organisations link to GitHub and to the <a href="https://github.com/go-scikit/roadmap/blob/main/PLAN.md"><u>plan</u></a> until they have a site.</p>
     <div class="grid">
       {{ range $orgs }}
       <div class="card">
-        <img src="https://raw.githubusercontent.com/{{ .name }}/brand/main/svg/color/{{ .name }}.svg" width="42" height="42" alt="{{ .name }} logo" style="border-radius:12px;margin-bottom:14px;display:block">
+        <div style="margin-bottom:14px">{{ partial "org-logo.html" (dict "org" . "size" 42 "radius" 12) }}</div>
         <h3>{{ .name }}</h3>
+        <p style="margin:2px 0 10px"><span class="tag active">{{ .state }}</span></p>
         <p>{{ .blurb | safeHTML }}</p>
-        <p style="margin-top:12px;font-weight:700;color:var(--accent)"><a href="https://{{ .name }}.github.io/">Site →</a> &nbsp; <a href="https://{{ .name }}.github.io/docs/">Docs →</a> &nbsp; <a href="https://github.com/{{ .name }}/{{ .lib }}">Source →</a>{{ with .playground }} &nbsp; <a href="{{ . }}">Playground →</a>{{ end }}</p>
+        <p style="margin-top:12px;font-weight:700;color:var(--accent)">{{ if .live }}<a href="https://{{ .name }}.github.io/">Site →</a> &nbsp; <a href="https://{{ .name }}.github.io/docs/">Docs →</a>{{ if .lib }} &nbsp; <a href="https://github.com/{{ .name }}/{{ .lib }}">Source →</a>{{ end }}{{ with .playground }} &nbsp; <a href="{{ . }}">Playground →</a>{{ end }}{{ else }}<a href="https://github.com/{{ .name }}">GitHub →</a> &nbsp; <a href="https://github.com/go-scikit/roadmap/blob/main/PLAN.md">Plan →</a>{{ end }}</p>
       </div>
       {{ end }}
     </div>
@@ -101,18 +102,13 @@
   <section id="roadmap" style="padding-top:10px"><div class="wrap">
     <span class="eyebrow">Roadmap</span>
     <h2>Parity with MATLAB and Mathematica, <i>in four waves</i>.</h2>
-    <p class="lead">The goal is feature parity with MATLAB (base and toolboxes) and Mathematica, in pure Go (CGO=0), each piece validated against the reference tools of its domain. The plan, the home of each domain and the order of the work are in the <a href="https://github.com/go-scikit/roadmap"><u>roadmap repository</u></a>: <a href="https://github.com/go-scikit/roadmap/blob/main/PLAN.md"><u>PLAN.md</u></a>, <a href="https://github.com/go-scikit/roadmap/blob/main/STATUS.md"><u>STATUS.md</u></a> and the <a href="https://github.com/go-scikit/roadmap/tree/main/bib"><u>bibliography</u></a>. Four packages of the new organisations have been released at v0.1.0: <a href="https://github.com/go-approx/interp"><u>go-approx/interp</u></a> (speed comparison in its <a href="https://github.com/go-approx/interp/blob/main/docs/perf.md"><u>docs/perf.md</u></a>), <a href="https://github.com/go-approx/poly"><u>go-approx/poly</u></a>, <a href="https://github.com/go-dsp/signal"><u>go-dsp/signal</u></a> and <a href="https://github.com/go-sparse/sparse"><u>go-sparse/sparse</u></a>; <a href="https://github.com/go-bignum/bigfloat"><u>go-bignum/bigfloat</u></a> is in development and not yet tagged. The vector-update kernels <code>Axpy</code>, <code>Xpby</code>, <code>AxpyDot</code> and <code>Scale</code> shipped in go-simd/floats v0.4.0.</p>
+    <p class="lead">The goal is feature parity with MATLAB (base and toolboxes) and Mathematica, in pure Go (CGO=0), each piece validated against the reference tools of its domain. The plan, the home of each domain and the order of the work are in the <a href="https://github.com/go-scikit/roadmap"><u>roadmap repository</u></a>: <a href="https://github.com/go-scikit/roadmap/blob/main/PLAN.md"><u>PLAN.md</u></a>, <a href="https://github.com/go-scikit/roadmap/blob/main/STATUS.md"><u>STATUS.md</u></a> and the <a href="https://github.com/go-scikit/roadmap/tree/main/bib"><u>bibliography</u></a>. Four packages of the new organisations have been released: <a href="https://github.com/go-approx/interp"><u>go-approx/interp</u></a> v0.2.0 (speed comparison in its <a href="https://github.com/go-approx/interp/blob/main/docs/perf.md"><u>docs/perf.md</u></a>), <a href="https://github.com/go-approx/poly"><u>go-approx/poly</u></a>, <a href="https://github.com/go-dsp/signal"><u>go-dsp/signal</u></a> and <a href="https://github.com/go-sparse/sparse"><u>go-sparse/sparse</u></a> v0.1.0, each at or below its reference's time on every case measured; <a href="https://github.com/go-bignum/bigfloat"><u>go-bignum/bigfloat</u></a> is in development and not yet tagged. The vector-update kernels <code>Axpy</code>, <code>Xpby</code>, <code>AxpyDot</code> and <code>Scale</code> shipped in go-simd/floats v0.4.0.</p>
     <div class="grid">
       {{ range .Site.Params.waves }}
       <div class="card"><h3>{{ .name }}</h3><p>{{ .what | safeHTML }}</p><p style="margin-top:12px;color:var(--slate);font-size:13.5px">Homes: {{ .homes }}</p></div>
       {{ end }}
     </div>
-    <p class="lead" style="margin-top:30px">The {{ len .Site.Params.neworgs }} new organisations. The first four have a landing page and documentation; the others are on GitHub only.</p>
-    <ul>
-      {{ range .Site.Params.neworgs }}
-      <li><a href="https://github.com/{{ .name }}"><b>{{ .name }}</b></a> ({{ .state }}): {{ .what }}{{ with .site }} &middot; <a href="{{ . }}"><u>landing</u></a>{{ end }}{{ with .docs }} &middot; <a href="{{ . }}"><u>docs</u></a>{{ end }}</li>
-      {{ end }}
-    </ul>
+    <p class="lead" style="margin-top:30px">The organisations of the plan are in <a href="#orgs"><u>the organisations</u></a> with the others, each card with its status: {{ len (where $orgs "live" true) }} have a landing and documentation, and the {{ len (where $orgs "live" "!=" true) }} planned ones link to GitHub and the plan.</p>
   </div></section>
 
   <section id="start" style="padding-top:10px"><div class="wrap">

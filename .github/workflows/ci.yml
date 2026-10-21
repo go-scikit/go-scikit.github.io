@@ -32,11 +32,20 @@ jobs:
       - name: every member organisation and repository is on it
         run: |
           rc=0
-          for org in go-ndarray go-fft go-numerics go-statistics go-dataframe go-plot go-notebook; do
+          for org in go-ndarray go-fft go-numerics go-statistics go-dataframe go-plot go-notebook \
+                     go-bignum go-sparse go-approx go-dsp; do
             for url in "https://$org.github.io/" "https://$org.github.io/docs/"; do
               grep -qF "$url" public/index.html \
                 || { echo "::error::$url is not on the page"; rc=1; }
             done
+          done
+          # The planned organisations have no site yet: their card links to
+          # GitHub, the organisation itself (minified HTML drops the quotes,
+          # so the link ends at '>' or '"', not at '/').
+          for org in go-symbolic go-mlkit go-autodiff go-geometry go-fem \
+                     go-graphalgo go-control go-units go-sciio; do
+            grep -qE "https://github.com/$org[\">]" public/index.html \
+              || { echo "::error::https://github.com/$org is not on the page"; rc=1; }
           done
           for repo in go-scikit.github.io brand .github; do
             grep -qF "go-scikit/$repo" public/index.html \
