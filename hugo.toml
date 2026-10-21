@@ -22,16 +22,26 @@ disableKinds = ['taxonomy', 'term', 'rss', 'sitemap', '404']
 [params]
   description = "go-scikit: the scientific stack for Go, in pure Go (CGO=0). N-dimensional arrays and NumPy's random numbers, FFTs, optimisation, integration and special functions, probability and statistics, labelled tables, figures and compiled, reactive notebooks, each measured against its Python reference."
 
-# One entry per member organisation. The cards in #orgs, the strip under the
-# hero, the stack diagram in #stack and the ci check that the page names
-# every organisation all come from this list. `layer` places it in the stack:
-# 0 the arrays, 1 the libraries that compute on them, 2 the notebook.
-# Every statement is from the organisation's own profile, README or landing.
+# One entry per member organisation, the established ones and those of the
+# parity plan alike: the cards in #orgs, the strip under the hero, the stack
+# diagram in #stack and the ci check that the page names every organisation
+# all come from this list, so every organisation is shown the same way.
+# `layer` places it in the stack: 0 the arrays, 1 the libraries that compute
+# on them, 2 the notebook. `state` is the release status (the highest tag of
+# `lib`, checked with the tags API). `live` means the organisation's landing
+# and documentation are published (otherwise the card links to GitHub, not to
+# pages that do not exist); `brand` means its logo is published (otherwise
+# the card shows the go-scikit mark). Every statement is from the
+# organisation's own profile, README or landing, or from the roadmap's
+# PLAN.md and STATUS.md.
 [[params.orgs]]
   name   = "go-ndarray"
   layer  = 0
   short  = "arrays, numpy.linalg, numpy.random"
   lib    = "ndarray"
+  state  = "ndarray v0.18.0"
+  live   = true
+  brand  = true
   blurb  = "N-dimensional arrays in 13 dtypes with NumPy 2 promotion, broadcasting, strided views and reductions, multicore and SIMD. Package <code>linalg</code> is <code>numpy.linalg</code>, <code>fft</code> is <code>numpy.fft</code>, and <code>random</code> is <code>numpy.random</code> with NumPy's numbers for the same seed."
   playground = "https://go-ndarray.github.io/playground/"
 [[params.orgs]]
@@ -39,6 +49,9 @@ disableKinds = ['taxonomy', 'term', 'rss', 'sitemap', '404']
   layer  = 0
   short  = "numpy.fft, scipy.fft"
   lib    = "fft"
+  state  = "fft v0.27.3"
+  live   = true
+  brand  = true
   blurb  = "The <code>numpy.fft</code> / <code>scipy.fft</code> equivalent: complex and real transforms of any length, N-D, the DCT and DST, single precision, windows, with no dependency on FFTW. AVX2 and AVX-512 kernels on amd64, NEON on arm64, bit-identical to the Go code."
   playground = "https://go-fft.github.io/playground/"
 [[params.orgs]]
@@ -46,6 +59,9 @@ disableKinds = ['taxonomy', 'term', 'rss', 'sitemap', '404']
   layer  = 1
   short  = "optimize, integrate, special"
   lib    = "optimize"
+  state  = "optimize, integrate, special v0.2.0"
+  live   = true
+  brand  = true
   blurb  = "Numerical methods ported statement by statement from their reference algorithms: minimisation, roots, least squares and linear programming (<code>optimize</code>); QUADPACK quadrature and ODE solvers (<code>integrate</code>); gamma, beta, error, Bessel and zeta functions measured against mpmath (<code>special</code>)."
   playground = "https://go-numerics.github.io/playground/"
 [[params.orgs]]
@@ -53,6 +69,9 @@ disableKinds = ['taxonomy', 'term', 'rss', 'sitemap', '404']
   layer  = 1
   short  = "distributions, statistics, tests"
   lib    = "stats"
+  state  = "stats v0.1.0"
+  live   = true
+  brand  = true
   blurb  = "32 univariate and 3 multivariate distributions with every method of SciPy's frozen distributions, descriptive statistics with NumPy's 13 quantile methods, and the statistical tests, from t-tests to Shapiro–Wilk and Anderson–Darling."
   playground = "https://go-statistics.github.io/playground/"
 [[params.orgs]]
@@ -60,19 +79,118 @@ disableKinds = ['taxonomy', 'term', 'rss', 'sitemap', '404']
   layer  = 1
   short  = "labelled tables"
   lib    = "dataframe"
+  state  = "dataframe v0.2.0"
+  live   = true
+  brand  = true
   blurb  = "<code>Series</code>, <code>DataFrame</code> and <code>Index</code> whose numeric columns are go-ndarray arrays: CSV, Arrow and Parquet, group-by, joins, reshaping and time series, giving pandas' answers."
 [[params.orgs]]
   name   = "go-plot"
   layer  = 1
   short  = "figures, SVG and PNG"
   lib    = "plot"
+  state  = "plot v0.1.1"
+  live   = true
+  brand  = true
   blurb  = "matplotlib's object model and defaults, figures to SVG and PNG, real TeX in the labels; ticks, colormaps and layout tested equal to matplotlib where they can be equal."
 [[params.orgs]]
   name   = "go-notebook"
   layer  = 2
   short  = "compiled, reactive notebooks"
   lib    = "notebook"
+  state  = "notebook v0.2.0"
+  live   = true
+  brand  = true
   blurb  = "A notebook is a Markdown file whose <code>go</code> blocks are cells. The kernel compiles it into a real Go program, orders the cells by what they use, and runs only what changed, keeping values across runs."
+[[params.orgs]]
+  name   = "go-bignum"
+  layer  = 1
+  short  = "arbitrary precision, oracle harness"
+  lib    = "bigfloat"
+  state  = "bigfloat in development, not yet tagged"
+  live   = true
+  brand  = true
+  blurb  = "Correctly rounded functions on <code>math/big</code>'s <code>big.Float</code> (exponentials, logarithms, roots, trigonometric, hyperbolic and power functions, constants), checked against mpmath, and the Go oracle harness the other organisations validate with. Ball arithmetic and number theory are planned."
+[[params.orgs]]
+  name   = "go-sparse"
+  layer  = 1
+  short  = "scipy.sparse, iterative solvers"
+  lib    = "sparse"
+  state  = "sparse v0.1.0"
+  live   = true
+  brand  = true
+  blurb  = "CSR, CSC and COO matrices with <code>int32</code> indices as in scipy.sparse, fill-reducing orderings (AMD, COLAMD, RCM) and preconditioned CG, GMRES, MINRES and LSQR with SciPy's iteration counts; every measured case at or below SciPy's time. Direct solvers and sparse eigensolvers are planned."
+[[params.orgs]]
+  name   = "go-approx"
+  layer  = 1
+  short  = "interpolation, splines, polynomials"
+  lib    = "interp"
+  state  = "interp and poly v0.1.0"
+  live   = true
+  brand  = true
+  blurb  = "<code>interp</code> is <code>numpy.interp</code>, <code>interp1d</code>, PCHIP, Akima, cubic, B- and smoothing splines and gridded interpolation; <code>poly</code> is <code>numpy.polyfit</code>, <code>roots</code> and the five <code>numpy.polynomial</code> bases, at or below NumPy's time. Chebyshev and AAA approximation and scattered data are planned."
+[[params.orgs]]
+  name   = "go-dsp"
+  layer  = 1
+  short  = "scipy.signal"
+  lib    = "signal"
+  state  = "signal v0.1.0"
+  live   = true
+  brand  = true
+  blurb  = "<code>scipy.signal</code> in Go: IIR and FIR design (Butterworth to elliptic, Remez, least squares), filtering, convolution, Welch, spectrograms, resampling and peak finding, all 28 measured cases at or below SciPy's time. Wavelets and audio I/O are planned."
+[[params.orgs]]
+  name   = "go-symbolic"
+  layer  = 1
+  short  = "computer algebra"
+  state  = "planned (wave 4)"
+  blurb  = "Computer algebra: expressions, simplification, differentiation, integration and equation solving, the core of what Mathematica does symbolically."
+[[params.orgs]]
+  name   = "go-mlkit"
+  layer  = 1
+  short  = "machine learning"
+  state  = "planned (wave 3)"
+  blurb  = "Machine learning on go-ndarray arrays: clustering, classification and regression models, and model selection."
+[[params.orgs]]
+  name   = "go-autodiff"
+  layer  = 1
+  short  = "automatic differentiation"
+  state  = "planned (wave 2)"
+  blurb  = "Automatic differentiation, forward and reverse mode, for the optimisers, solvers and models of the other organisations."
+[[params.orgs]]
+  name   = "go-geometry"
+  layer  = 1
+  short  = "computational geometry"
+  state  = "planned (wave 2)"
+  blurb  = "Robust predicates, convex hulls, Delaunay triangulations, Voronoi diagrams, k-d trees and mesh generation."
+[[params.orgs]]
+  name   = "go-fem"
+  layer  = 1
+  short  = "finite elements, PDEs"
+  state  = "planned (wave 3)"
+  blurb  = "Finite elements and PDE solvers on the meshes of go-geometry and the sparse solvers of go-sparse."
+[[params.orgs]]
+  name   = "go-graphalgo"
+  layer  = 1
+  short  = "graph algorithms"
+  state  = "planned (wave 3)"
+  blurb  = "Graph algorithms: traversals, shortest paths, flows, matchings, connectivity and centrality."
+[[params.orgs]]
+  name   = "go-control"
+  layer  = 1
+  short  = "control systems, DAEs"
+  state  = "planned (wave 3)"
+  blurb  = "Control systems (transfer functions, state space, analysis and design) and DAE solvers."
+[[params.orgs]]
+  name   = "go-units"
+  layer  = 1
+  short  = "units, physical constants"
+  state  = "planned (wave 2)"
+  blurb  = "Units of measure with dimensional checking, and the physical constants."
+[[params.orgs]]
+  name   = "go-sciio"
+  layer  = 0
+  short  = "scientific file formats"
+  state  = "planned (wave 2)"
+  blurb  = "Scientific file formats read into and written from go-ndarray arrays: HDF5, MAT, NetCDF, FITS, npy, Matrix Market, WAV and FLAC."
 
 # The cards of #measured and their count come from this list. Each statement
 # is from the document its link names.
@@ -142,67 +260,6 @@ disableKinds = ['taxonomy', 'term', 'rss', 'sitemap', '404']
   name  = "Wave 4: Mathematica's core"
   what  = "Ball arithmetic, N-digit special functions and number theory; computer algebra."
   homes = "go-bignum, go-symbolic"
-
-[[params.neworgs]]
-  name = "go-bignum"
-  state = "bigfloat in development, not yet tagged"
-  what = "arbitrary precision, number theory, the Go oracle harness"
-  site = "https://go-bignum.github.io/"
-  docs = "https://go-bignum.github.io/docs/"
-[[params.neworgs]]
-  name = "go-sparse"
-  state = "sparse v0.1.0 released"
-  what = "sparse matrices, orderings, iterative and direct solvers, sparse eigensolvers"
-  site = "https://go-sparse.github.io/"
-  docs = "https://go-sparse.github.io/docs/"
-[[params.neworgs]]
-  name = "go-approx"
-  state = "interp and poly v0.1.0 released"
-  what = "interpolation, splines, polynomials, Chebyshev and AAA approximation, scattered data"
-  site = "https://go-approx.github.io/"
-  docs = "https://go-approx.github.io/docs/"
-[[params.neworgs]]
-  name = "go-dsp"
-  state = "signal v0.1.0 released"
-  what = "filter design and filtering, spectral estimation, resampling, wavelets, audio I/O"
-  site = "https://go-dsp.github.io/"
-  docs = "https://go-dsp.github.io/docs/"
-[[params.neworgs]]
-  name = "go-symbolic"
-  state = "planned"
-  what = "computer algebra"
-[[params.neworgs]]
-  name = "go-mlkit"
-  state = "planned"
-  what = "machine learning, clustering, classification, model selection"
-[[params.neworgs]]
-  name = "go-autodiff"
-  state = "planned"
-  what = "automatic differentiation"
-[[params.neworgs]]
-  name = "go-geometry"
-  state = "planned"
-  what = "robust predicates, convex hull, Delaunay, Voronoi, k-d trees, mesh generation"
-[[params.neworgs]]
-  name = "go-fem"
-  state = "planned"
-  what = "finite elements and PDE solvers"
-[[params.neworgs]]
-  name = "go-graphalgo"
-  state = "planned"
-  what = "graph algorithms"
-[[params.neworgs]]
-  name = "go-control"
-  state = "planned"
-  what = "control systems and DAE solvers"
-[[params.neworgs]]
-  name = "go-units"
-  state = "planned"
-  what = "units and physical constants"
-[[params.neworgs]]
-  name = "go-sciio"
-  state = "planned"
-  what = "scientific file formats (HDF5, MAT, NetCDF, FITS, npy, Matrix Market, WAV/FLAC)"
 
 # Every field below is rendered by layouts/index.html (#repos). A field
 # nothing renders does not stay true.
