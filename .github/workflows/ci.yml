@@ -40,10 +40,11 @@ jobs:
             done
           done
           # The planned organisations have no site yet: their card links to
-          # GitHub.
+          # GitHub, the organisation itself (minified HTML drops the quotes,
+          # so the link ends at '>' or '"', not at '/').
           for org in go-symbolic go-mlkit go-autodiff go-geometry go-fem \
                      go-graphalgo go-control go-units go-sciio; do
-            grep -qF "https://github.com/$org\"" public/index.html \
+            grep -qE "https://github.com/$org[\">]" public/index.html \
               || { echo "::error::https://github.com/$org is not on the page"; rc=1; }
           done
           for repo in go-scikit.github.io brand .github; do
