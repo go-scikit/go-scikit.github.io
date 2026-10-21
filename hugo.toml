@@ -124,7 +124,8 @@ disableKinds = ['taxonomy', 'term', 'rss', 'sitemap', '404']
 
 # The roadmap section (#roadmap). Every statement is from
 # https://github.com/go-scikit/roadmap (PLAN.md and STATUS.md); the new
-# organisations have no sites yet, so they link to their GitHub pages.
+# organisations that have a landing and a documentation site carry `site` and
+# `docs`; the others link to their GitHub pages.
 [[params.waves]]
   name  = "Wave 1: the everyday MATLAB core"
   what  = "Correctly rounded <code>big.Float</code> functions and a Go oracle harness; sparse matrices and iterative solvers; interpolation and splines; filter design and spectral estimation."
@@ -144,20 +145,28 @@ disableKinds = ['taxonomy', 'term', 'rss', 'sitemap', '404']
 
 [[params.neworgs]]
   name = "go-bignum"
-  state = "in progress"
+  state = "bigfloat in development, not yet tagged"
   what = "arbitrary precision, number theory, the Go oracle harness"
+  site = "https://go-bignum.github.io/"
+  docs = "https://go-bignum.github.io/docs/"
 [[params.neworgs]]
   name = "go-sparse"
-  state = "in progress"
+  state = "sparse v0.1.0 released"
   what = "sparse matrices, orderings, iterative and direct solvers, sparse eigensolvers"
+  site = "https://go-sparse.github.io/"
+  docs = "https://go-sparse.github.io/docs/"
 [[params.neworgs]]
   name = "go-approx"
-  state = "interp v0.1.0 released; poly performance work in review (poly#2)"
+  state = "interp and poly v0.1.0 released"
   what = "interpolation, splines, polynomials, Chebyshev and AAA approximation, scattered data"
+  site = "https://go-approx.github.io/"
+  docs = "https://go-approx.github.io/docs/"
 [[params.neworgs]]
   name = "go-dsp"
-  state = "in progress"
+  state = "signal v0.1.0 released"
   what = "filter design and filtering, spectral estimation, resampling, wavelets, audio I/O"
+  site = "https://go-dsp.github.io/"
+  docs = "https://go-dsp.github.io/docs/"
 [[params.neworgs]]
   name = "go-symbolic"
   state = "planned"
@@ -207,6 +216,11 @@ disableKinds = ['taxonomy', 'term', 'rss', 'sitemap', '404']
   kind  = "assets"
   href  = "https://github.com/go-scikit/brand"
   blurb = "Logos and icons in SVG / PNG / JPG / ICO / ICNS; the mark is the stack, written by a Go program from the list of member organisations."
+[[params.repos]]
+  name  = "docs"
+  kind  = "docs"
+  href  = "https://github.com/go-scikit/docs"
+  blurb = "The documentation site (Hugo and Hextra), served at go-scikit.github.io/docs: the member organisations with their landing and docs links, and the status of the parity-plan packages."
 [[params.repos]]
   name  = "roadmap"
   kind  = "plan"

@@ -28,4 +28,14 @@ hugo server
 | `ci.yml` | the site builds and names every member organisation and repository; the notebook prints what the page says |
 | `links.yml` | every link and image of the built site resolves (`landingkit links`) |
 
+## Documentation
+
+The documentation site is [go-scikit/docs](https://github.com/go-scikit/docs),
+served at <https://go-scikit.github.io/docs/>. The roadmap section of the page
+lists the parity-plan organisations with their status (a package is "released"
+only when a tag exists) and, where they exist, their landing and docs sites:
+[go-approx](https://go-approx.github.io/), [go-dsp](https://go-dsp.github.io/),
+[go-sparse](https://go-sparse.github.io/) and
+[go-bignum](https://go-bignum.github.io/).
+
 BSD-3-Clause.
