@@ -47,7 +47,7 @@ jobs:
             grep -qE "https://github.com/$org[\">]" public/index.html \
               || { echo "::error::https://github.com/$org is not on the page"; rc=1; }
           done
-          for repo in go-scikit.github.io brand .github; do
+          for repo in go-scikit.github.io brand .github docs roadmap ruby; do
             grep -qF "go-scikit/$repo" public/index.html \
               || { echo "::error::go-scikit/$repo is not on the page"; rc=1; }
           done
