@@ -97,10 +97,10 @@ disableKinds = ['taxonomy', 'term', 'rss', 'sitemap', '404']
   layer  = 2
   short  = "compiled, reactive notebooks"
   lib    = "notebook"
-  state  = "notebook v0.2.0"
+  state  = "notebook v0.3.0"
   live   = true
   brand  = true
-  blurb  = "A notebook is a Markdown file whose <code>go</code> blocks are cells. The kernel compiles it into a real Go program, orders the cells by what they use, and runs only what changed, keeping values across runs."
+  blurb  = "A notebook is a Markdown file whose <code>go</code> and <code>ruby</code> blocks are cells. The kernel compiles it into a real Go program, orders the cells of both languages by what they use, and runs only what changed, keeping values across runs. Ruby cells run on go-embedded-ruby, with the go-scikit bindings."
 [[params.orgs]]
   name   = "go-bignum"
   layer  = 1
@@ -278,6 +278,11 @@ disableKinds = ['taxonomy', 'term', 'rss', 'sitemap', '404']
   kind  = "docs"
   href  = "https://github.com/go-scikit/docs"
   blurb = "The documentation site (Hugo and Hextra), served at go-scikit.github.io/docs: the member organisations with their landing and docs links, and the status of the parity-plan packages."
+[[params.repos]]
+  name  = "ruby"
+  kind  = "bindings"
+  href  = "https://github.com/go-scikit/ruby"
+  blurb = "Ruby bindings to the stack, for go-embedded-ruby (v0.1.0): <code>Stats</code>, <code>Special</code>, <code>Optimize</code>, <code>Integrate</code>, <code>DataFrame</code> and <code>Plot</code>, each compared with the Go call it wraps, and the runner of a notebook's <code>ruby</code> cells."
 [[params.repos]]
   name  = "roadmap"
   kind  = "plan"

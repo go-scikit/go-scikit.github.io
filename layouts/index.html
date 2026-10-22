@@ -31,12 +31,12 @@
       <h1 class="head">Science in Go,<br>{{/* The sheet's .accent paints with --grad, base to deep: on a dark page
          this logo's dark slate stops would vanish. --accent and --accent-deep
          are the same two in light and the bright stop in dark. */}}<span class="accent" style="background:linear-gradient(135deg,var(--accent),var(--accent-deep));-webkit-background-clip:text;background-clip:text">all the way down.</span></h1>
-      <p class="sub">go-scikit is the umbrella over <b>{{ len $orgs }} organisations</b> that together cover what a Python notebook reaches for in NumPy, SciPy, pandas and matplotlib: <b>arrays</b>, <b>FFTs</b>, <b>numerical methods</b>, <b>statistics</b>, <b>labelled tables</b>, <b>figures</b> and <b>notebooks</b>, and, on the way to parity with MATLAB and Mathematica, <b>sparse matrices</b>, <b>interpolation</b>, <b>signal processing</b> and <b>arbitrary precision</b>. Pure Go, CGO=0, and each library measured against its reference, with the documents that say where it is slower or less accurate.</p>
+      <p class="sub">go-scikit is the umbrella over <b>{{ len $orgs }} organisations</b> that together cover what a Python notebook reaches for in NumPy, SciPy, pandas and matplotlib: <b>arrays</b>, <b>FFTs</b>, <b>numerical methods</b>, <b>statistics</b>, <b>labelled tables</b>, <b>figures</b> and <b>notebooks</b>, and, on the way to parity with MATLAB and Mathematica, <b>sparse matrices</b>, <b>interpolation</b>, <b>signal processing</b> and <b>arbitrary precision</b>. Pure Go, CGO=0, and each library measured against its reference, with the documents that say where it is slower or less accurate. A notebook's cells can be <b>Go</b> or <b>Ruby</b>, one cell reading what the other computed.</p>
       <div class="cta">
         <a class="btn btn-primary" href="#start">Write a first notebook →</a>
         <a class="btn btn-ghost" href="#orgs">{{ partial "icons/book.html" . }}The organisations</a>
       </div>
-      <div class="trust"><span><b>{{ len $orgs }}</b> organisations</span><span><b>CGO=0</b> everywhere</span><span><b>BSD-3-Clause</b></span></div>
+      <div class="trust"><span><b>{{ len $orgs }}</b> organisations</span><span><b>Go</b> and <b>Ruby</b> cells</span><span><b>CGO=0</b> everywhere</span><span><b>BSD-3-Clause</b></span></div>
     </div>
     <div class="term" style="min-width:0">
       <div class="bar"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i><span class="t">first.md</span></div>
@@ -114,7 +114,7 @@
   <section id="start" style="padding-top:10px"><div class="wrap">
     <span class="eyebrow">Get started</span>
     <h2>A first notebook, <i>in four commands</i>.</h2>
-    <p class="lead">A notebook is a Markdown file; its <code>go</code> blocks are the cells. Put the notebook from the top of this page in <code>first.md</code>, in a module that requires the libraries it imports, and run it. It prints the quartiles of a thousand normal draws from seed 42: the draws SciPy's <code>norm.rvs(10, 2, size=1000, random_state=np.random.default_rng(42))</code> makes.</p>
+    <p class="lead">A notebook is a Markdown file; its <code>go</code> and <code>ruby</code> blocks are the cells. Put the notebook from the top of this page in <code>first.md</code>, in a module that requires the libraries its Go cells import, and run it. It prints the quartiles of a thousand normal draws from seed 42 (the draws SciPy's <code>norm.rvs(10, 2, size=1000, random_state=np.random.default_rng(42))</code> makes), then fits a normal distribution to the same draws in Ruby.</p>
     <div class="term" style="margin-top:22px">
       <div class="bar"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i><span class="t">shell</span></div>
 <pre style="white-space:pre;overflow-x:auto"><span class="c-cmd">$ go install github.com/go-notebook/notebook/cmd/notebook@latest</span>
@@ -126,6 +126,7 @@
 # notebook serve first.md   the same, live in the browser, editable</span></pre>
     </div>
     <p class="lead">Run it again and every cell is <i>kept</i>: a cell whose code and inputs did not change is not run again, across runs. The <a href="https://go-notebook.github.io/docs/"><u>go-notebook documentation</u></a> gives the cell rules; to try the arrays and the transforms without installing anything, the <a href="https://go-ndarray.github.io/playground/"><u>go-ndarray</u></a> and <a href="https://go-fft.github.io/playground/"><u>go-fft</u></a> playgrounds run them compiled to WebAssembly in the browser, and the <a href="https://go-statistics.github.io/playground/"><u>go-statistics</u></a> and <a href="https://go-numerics.github.io/playground/"><u>go-numerics</u></a> playgrounds run whole notebooks there: edit the cells, run them, see the figures.</p>
+    <p class="lead">A <code>ruby</code> cell runs on <a href="https://github.com/go-embedded-ruby"><u>go-embedded-ruby</u></a>, a Ruby written in Go, so the notebook stays one Go program with no Ruby to install. It sees the values the Go cells above it defined (here <code>x</code>, a Go <code>[]float64</code>), and the Go cells below it see what it defines; the kernel orders and re-runs cells of both languages by what they use. From Ruby, the stack is reached through <a href="https://github.com/go-scikit/ruby"><u>go-scikit/ruby</u></a>, which the kernel adds by itself: <code>Stats</code>, <code>Special</code>, <code>Optimize</code>, <code>Integrate</code>, <code>DataFrame</code> and <code>Plot</code> call the same Go functions, with the same answers. The <a href="https://go-notebook.github.io/docs/latest/ruby/"><u>Ruby cells page</u></a> gives the rules, and the <code>-timeout</code> and <code>-memory</code> limits that stop a runaway cell.</p>
   </div></section>
 
   <section id="repos" style="padding-top:10px"><div class="wrap">
