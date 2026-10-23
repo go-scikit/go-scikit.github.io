@@ -124,7 +124,7 @@ disableKinds = ['taxonomy', 'term', 'rss', 'sitemap', '404']
   layer  = 1
   short  = "interpolation, splines, polynomials"
   lib    = "interp"
-  state  = "interp v0.2.0, poly v0.1.0"
+  state  = "interp v0.2.1, poly v0.1.0"
   live   = true
   brand  = true
   blurb  = "<code>interp</code> is <code>numpy.interp</code>, <code>interp1d</code>, PCHIP, Akima, cubic, B- and smoothing splines and gridded interpolation; <code>poly</code> is <code>numpy.polyfit</code>, <code>roots</code> and the five <code>numpy.polynomial</code> bases, at or below NumPy's time. Chebyshev and AAA approximation and scattered data are planned."
@@ -142,54 +142,72 @@ disableKinds = ['taxonomy', 'term', 'rss', 'sitemap', '404']
   layer  = 1
   short  = "computer algebra"
   state  = "planned (wave 4)"
+  live   = true
+  brand  = true
   blurb  = "Computer algebra: expressions, simplification, differentiation, integration and equation solving, the core of what Mathematica does symbolically."
 [[params.orgs]]
   name   = "go-mlkit"
   layer  = 1
   short  = "machine learning"
   state  = "planned (wave 3)"
+  live   = true
+  brand  = true
   blurb  = "Machine learning on go-ndarray arrays: clustering, classification and regression models, and model selection."
 [[params.orgs]]
   name   = "go-autodiff"
   layer  = 1
   short  = "automatic differentiation"
   state  = "planned (wave 2)"
+  live   = true
+  brand  = true
   blurb  = "Automatic differentiation, forward and reverse mode, for the optimisers, solvers and models of the other organisations."
 [[params.orgs]]
   name   = "go-geometry"
   layer  = 1
   short  = "computational geometry"
   state  = "planned (wave 2)"
+  live   = true
+  brand  = true
   blurb  = "Robust predicates, convex hulls, Delaunay triangulations, Voronoi diagrams, k-d trees and mesh generation."
 [[params.orgs]]
   name   = "go-fem"
   layer  = 1
   short  = "finite elements, PDEs"
   state  = "planned (wave 3)"
+  live   = true
+  brand  = true
   blurb  = "Finite elements and PDE solvers on the meshes of go-geometry and the sparse solvers of go-sparse."
 [[params.orgs]]
   name   = "go-graphalgo"
   layer  = 1
   short  = "graph algorithms"
   state  = "planned (wave 3)"
+  live   = true
+  brand  = true
   blurb  = "Graph algorithms: traversals, shortest paths, flows, matchings, connectivity and centrality."
 [[params.orgs]]
   name   = "go-control"
   layer  = 1
   short  = "control systems, DAEs"
   state  = "planned (wave 3)"
+  live   = true
+  brand  = true
   blurb  = "Control systems (transfer functions, state space, analysis and design) and DAE solvers."
 [[params.orgs]]
   name   = "go-units"
   layer  = 1
   short  = "units, physical constants"
   state  = "planned (wave 2)"
+  live   = true
+  brand  = true
   blurb  = "Units of measure with dimensional checking, and the physical constants."
 [[params.orgs]]
   name   = "go-sciio"
   layer  = 0
   short  = "scientific file formats"
   state  = "planned (wave 2)"
+  live   = true
+  brand  = true
   blurb  = "Scientific file formats read into and written from go-ndarray arrays: HDF5, MAT, NetCDF, FITS, npy, Matrix Market, WAV and FLAC."
 
 # The cards of #measured and their count come from this list. Each statement
