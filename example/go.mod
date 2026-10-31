@@ -1,6 +1,6 @@
 module github.com/go-scikit/go-scikit.github.io/example
 
-go 1.27.2
+go 1.27.3
 
 require (
 	github.com/go-ndarray/ndarray v0.12.0
