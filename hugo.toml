@@ -308,6 +308,11 @@ disableKinds = ['taxonomy', 'term', 'rss', 'sitemap', '404']
   href  = "https://github.com/go-scikit/roadmap"
   blurb = "The parity plan with MATLAB and Mathematica: the home of each domain, the four waves, the status of each item and the bibliography."
 [[params.repos]]
+  name  = "refbench"
+  kind  = "tool"
+  href  = "https://github.com/go-scikit/refbench"
+  blurb = "The shared reference-benchmark tool (v0.1.0): Go against NumPy, SciPy or C on one core, in interleaved rounds, gated on the host's load; writes <code>docs/perf.json</code> and <code>docs/perf-table.md</code>, checks allocations and the public-function denominator in CI, drafts an issue per slower row."
+[[params.repos]]
   name  = ".github"
   kind  = "profile"
   href  = "https://github.com/go-scikit/.github"
