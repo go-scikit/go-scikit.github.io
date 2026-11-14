@@ -22,6 +22,18 @@ disableKinds = ['taxonomy', 'term', 'rss', 'sitemap', '404']
 [params]
   description = "go-scikit: the scientific stack for Go, in pure Go (CGO=0). N-dimensional arrays and NumPy's random numbers, FFTs, optimisation, integration and special functions, probability and statistics, labelled tables, figures and compiled, reactive notebooks, each measured against its Python reference."
 
+# The hero's buttons, rendered by landingkit's cta.html in the kit's order.
+# No [params.mantra] goarch: this umbrella repository holds no library, so it
+# has no test matrix to read; the member organisations carry their own lines.
+[[params.cta]]
+  kind  = "docs"
+  href  = "#start"
+  label = "Write a first notebook →"
+[[params.cta]]
+  kind  = "link"
+  href  = "#orgs"
+  label = "The organisations"
+
 # One entry per member organisation, the established ones and those of the
 # parity plan alike: the cards in #orgs, the strip under the hero, the stack
 # diagram in #stack and the ci check that the page names every organisation
