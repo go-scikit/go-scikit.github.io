@@ -31,12 +31,10 @@
       <h1 class="head">Science in Go,<br>{{/* The sheet's .accent paints with --grad, base to deep: on a dark page
          this logo's dark slate stops would vanish. --accent and --accent-deep
          are the same two in light and the bright stop in dark. */}}<span class="accent" style="background:linear-gradient(135deg,var(--accent),var(--accent-deep));-webkit-background-clip:text;background-clip:text">all the way down.</span></h1>
-      <p class="sub">go-scikit is the umbrella over <b>{{ len $orgs }} organisations</b> that together cover what a Python notebook reaches for in NumPy, SciPy, pandas and matplotlib: <b>arrays</b>, <b>FFTs</b>, <b>numerical methods</b>, <b>statistics</b>, <b>labelled tables</b>, <b>figures</b> and <b>notebooks</b>, and, on the way to parity with MATLAB and Mathematica, <b>sparse matrices</b>, <b>interpolation</b>, <b>signal processing</b> and <b>arbitrary precision</b>. Pure Go, CGO=0, and each library measured against its reference, with the documents that say where it is slower or less accurate. A notebook's cells can be <b>Go</b> or <b>Ruby</b>, one cell reading what the other computed. <code>julia</code> cells are <b>planned</b> on <a href="https://go-embedded-julia.github.io/">go-embedded-julia</a> (<a href="https://github.com/go-scikit/roadmap/blob/main/bib/julia.md">plan</a>).</p>
-      <div class="cta">
-        <a class="btn btn-primary" href="#start">Write a first notebook →</a>
-        <a class="btn btn-ghost" href="#orgs">{{ partial "icons/book.html" . }}The organisations</a>
-      </div>
-      <div class="trust"><span><b>{{ len $orgs }}</b> organisations</span><span><b>Go</b> and <b>Ruby</b> cells</span><span><b>CGO=0</b> everywhere</span><span><b>BSD-3-Clause</b></span></div>
+      <p class="sub">go-scikit is the umbrella over <b>{{ len $orgs }} organisations</b> that together cover what a Python notebook reaches for in NumPy, SciPy, pandas and matplotlib: <b>arrays</b>, <b>FFTs</b>, <b>numerical methods</b>, <b>statistics</b>, <b>labelled tables</b>, <b>figures</b> and <b>notebooks</b>, and, on the way to parity with MATLAB and Mathematica, <b>sparse matrices</b>, <b>interpolation</b>, <b>signal processing</b> and <b>arbitrary precision</b>.{{ if not (partial "mantra-on.html" .) }} Pure Go, CGO=0,{{ end }} Each library is measured against its reference, with the documents that say where it is slower or less accurate. A notebook's cells can be <b>Go</b> or <b>Ruby</b>, one cell reading what the other computed. <code>julia</code> cells are <b>planned</b> on <a href="https://go-embedded-julia.github.io/">go-embedded-julia</a> (<a href="https://github.com/go-scikit/roadmap/blob/main/bib/julia.md">plan</a>).</p>
+      {{/* [[params.cta]] in hugo.toml: the kit renders the row */}}
+      {{ partial "cta.html" . }}
+      <div class="trust"><span><b>{{ len $orgs }}</b> organisations</span><span><b>Go</b> and <b>Ruby</b> cells</span>{{ if not (partial "mantra-on.html" .) }}<span><b>CGO=0</b> everywhere</span><span><b>BSD-3-Clause</b></span>{{ end }}</div>
     </div>
     <div class="term" style="min-width:0">
       <div class="bar"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i><span class="t">first.md</span></div>
@@ -150,6 +148,6 @@
     </div>
   </div></section>
 
-  <footer><div class="wrap"><span>go-scikit · <a href="https://github.com/go-scikit">go-scikit on GitHub</a> · BSD-3-Clause</span><span>arrays in · science out</span></div></footer>
+  <footer><div class="wrap"><span>go-scikit · <a href="https://github.com/go-scikit">go-scikit on GitHub</a>{{ if not (partial "mantra-on.html" .) }} · BSD-3-Clause{{ end }}</span><span>arrays in · science out</span></div></footer>
 </body>
 </html>
