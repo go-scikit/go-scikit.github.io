@@ -12,9 +12,9 @@ require (
 	github.com/go-blas/blas v0.2.1 // indirect
 	github.com/go-embedded-c/c v0.2.1 // indirect
 	github.com/go-embedded-fortran/fortran v0.24.0 // indirect
-	github.com/go-embedded-julia/julia v0.19.0 // indirect
+	github.com/go-embedded-julia/julia v0.20.0 // indirect
 	github.com/go-embedded-r/r v0.17.1 // indirect
-	github.com/go-notebook/notebook v0.21.1 // indirect
+	github.com/go-notebook/notebook v0.21.2 // indirect
 	github.com/go-numerics/optimize v0.6.0 // indirect
 	github.com/go-numerics/special v0.5.3 // indirect
 	github.com/go-opentype/opentype v0.16.1 // indirect
