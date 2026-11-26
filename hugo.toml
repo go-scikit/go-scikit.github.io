@@ -140,7 +140,7 @@ disableKinds = ['taxonomy', 'term', 'rss', 'sitemap', '404']
   state  = "interp v0.2.2, poly v0.1.1"
   live   = true
   brand  = true
-  blurb  = "<code>numpy.interp</code>, <code>interp1d</code>, PCHIP, Akima and splines, and <code>numpy.polyfit</code>, <code>roots</code> and the five <code>numpy.polynomial</code> bases; PCHIP and Akima bit-identical to SciPy."
+  blurb  = "<code>numpy.interp</code>, <code>interp1d</code>, PCHIP, Akima and splines, and <code>numpy.polyfit</code>, <code>roots</code> and the five <code>numpy.polynomial</code> bases."
 [[params.orgs]]
   name   = "go-dsp"
   layer  = 1
@@ -149,7 +149,7 @@ disableKinds = ['taxonomy', 'term', 'rss', 'sitemap', '404']
   state  = "signal v0.2.0"
   live   = true
   brand  = true
-  blurb  = "<code>scipy.signal</code> in Go: IIR and FIR design, filtering, Welch, spectrograms, resampling and peak finding; 40 Remez designs within 3e-8 of SciPy."
+  blurb  = "<code>scipy.signal</code> in Go: IIR and FIR design, filtering, Welch, spectrograms, resampling and peak finding; <a href=\"https://github.com/go-dsp/signal/blob/main/docs/accuracy.md\">Remez within 7.3e-14 of SciPy</a> (normalised error, 300 values)."
 [[params.orgs]]
   name   = "go-symbolic"
   layer  = 1
