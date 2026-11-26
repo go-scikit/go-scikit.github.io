@@ -131,7 +131,7 @@ disableKinds = ['taxonomy', 'term', 'rss', 'sitemap', '404']
   state  = "sparse v0.3.2"
   live   = true
   brand  = true
-  blurb  = "CSR, CSC and COO matrices with <code>int32</code> indices as in scipy.sparse, fill-reducing orderings (AMD, COLAMD, RCM) and preconditioned CG, GMRES, MINRES and LSQR with SciPy's iteration counts, and a quasi-definite LDLᵀ factorisation (a QDLDL port). The six spmv, CG and GMRES cases measured are at or below SciPy's time; the refbench table is still deferred. General direct solvers and sparse eigensolvers are planned."
+  blurb  = "<code>scipy.sparse</code> in Go: CSR, CSC and COO, AMD, COLAMD and RCM orderings, CG, GMRES, MINRES and LSQR with SciPy's iteration counts, and a quasi-definite LDLᵀ (a QDLDL port)."
 [[params.orgs]]
   name   = "go-approx"
   layer  = 1
@@ -140,7 +140,7 @@ disableKinds = ['taxonomy', 'term', 'rss', 'sitemap', '404']
   state  = "interp v0.2.2, poly v0.1.1"
   live   = true
   brand  = true
-  blurb  = "<code>interp</code> is <code>numpy.interp</code>, <code>interp1d</code>, PCHIP, Akima, cubic, B- and smoothing splines and gridded interpolation; <code>poly</code> is <code>numpy.polyfit</code>, <code>roots</code> and the five <code>numpy.polynomial</code> bases. Timings against NumPy and SciPy are deferred until a run under the load gate. Chebyshev and AAA approximation and scattered data are planned."
+  blurb  = "<code>numpy.interp</code>, <code>interp1d</code>, PCHIP, Akima and splines, and <code>numpy.polyfit</code>, <code>roots</code> and the five <code>numpy.polynomial</code> bases."
 [[params.orgs]]
   name   = "go-dsp"
   layer  = 1
@@ -149,7 +149,7 @@ disableKinds = ['taxonomy', 'term', 'rss', 'sitemap', '404']
   state  = "signal v0.2.0"
   live   = true
   brand  = true
-  blurb  = "<code>scipy.signal</code> in Go: IIR and FIR design (Butterworth to elliptic, Remez, least squares), filtering, convolution, Welch, spectrograms, resampling and peak finding; 28 cases measured on 2026-10-19 were at or below SciPy's time, and the refbench rerun is deferred. Wavelets and audio I/O are planned."
+  blurb  = "<code>scipy.signal</code> in Go: IIR and FIR design, filtering, Welch, spectrograms, resampling and peak finding; <a href=\"https://github.com/go-dsp/signal/blob/main/docs/accuracy.md\">Remez within 7.3e-14 of SciPy</a> (normalised error, 300 values)."
 [[params.orgs]]
   name   = "go-symbolic"
   layer  = 1
@@ -257,17 +257,17 @@ disableKinds = ['taxonomy', 'term', 'rss', 'sitemap', '404']
   link = "go-fft benchmarks"
 [[params.claims]]
   name = "Against NumPy, one core"
-  what = "go-ndarray, refbench run of 2026-11-15 (linux/amd64, one core): 54 of 256 rows faster than NumPy, 17 ties, 185 slower. Those are open defects, and the table lists each."
+  what = "go-ndarray, one core, run of 2026-11-15: faster than NumPy on 54 of 256 rows. The table lists the rest as open defects."
   href = "https://github.com/go-ndarray/ndarray/blob/main/docs/perf.md"
   link = "go-ndarray performance"
 [[params.claims]]
   name = "Special functions against SciPy"
-  what = "go-numerics' special functions, refbench run of 2026-11-23 (one core, 156 rows): 111 faster than SciPy, 1 tie, 44 slower, the slower ones listed as open defects."
+  what = "go-numerics' special functions, one core, run of 2026-11-23: faster than SciPy on 111 of 156 rows. The table lists the rest as open defects."
   href = "https://github.com/go-numerics/special/blob/main/docs/perf.md"
   link = "go-numerics special performance"
 [[params.claims]]
   name = "Optimisers against SciPy"
-  what = "go-numerics' optimize v0.9.0, refbench run of 2026-11-13: 53 of 53 rows faster than SciPy, BFGS on Rosenbrock n = 100 5.42 ms against 47.3 ms."
+  what = "go-numerics' optimize v0.9.0, run of 2026-11-13: faster than SciPy on 53 of 53 rows. The table has the times."
   href = "https://github.com/go-numerics/optimize/blob/main/docs/perf.md"
   link = "go-numerics optimize performance"
 [[params.claims]]
@@ -323,7 +323,7 @@ disableKinds = ['taxonomy', 'term', 'rss', 'sitemap', '404']
   name  = "ruby"
   kind  = "bindings"
   href  = "https://github.com/go-scikit/ruby"
-  blurb = "Ruby bindings to the stack (v0.2.1), for go-embedded-ruby v0.8.4:<code>Stats</code>, <code>Special</code>, <code>Optimize</code>, <code>Integrate</code>, <code>DataFrame</code> and <code>Plot</code>, each compared with the Go call it wraps, and the runner of a notebook's <code>ruby</code> cells."
+  blurb = "Ruby bindings to the stack (v0.2.1), for go-embedded-ruby v0.8.4: <code>Stats</code>, <code>Special</code>, <code>Optimize</code>, <code>Integrate</code>, <code>DataFrame</code> and <code>Plot</code>, each compared with the Go call it wraps, and the runner of a notebook's <code>ruby</code> cells."
 [[params.repos]]
   name  = "roadmap"
   kind  = "plan"
